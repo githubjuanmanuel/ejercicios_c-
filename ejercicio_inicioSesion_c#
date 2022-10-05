@@ -1,0 +1,94 @@
+    //Declaracion de la lista
+List<string> usuario = new List<string>();
+List<string> contrasena = new List<string>();
+principal();
+
+
+void principal()
+{
+    string respuesta;
+    string respuesta2;
+    string usuario, contra;
+    Console.WriteLine("Bienvenido aún no hay usuarios ingresados");
+    Console.WriteLine("¿Deseas registrar algún usuario (s/n)?");
+    respuesta = Console.ReadLine();
+
+    while (respuesta == "s")
+    {
+        Console.WriteLine("Ingrese un nuevo usuario");
+        llenarUsuario(Console.ReadLine());
+        Console.WriteLine("Ingrese la contraseña");
+        llenarContra(Console.ReadLine());
+
+        Console.WriteLine("¿Deseas ingresar otro usuario?");
+        respuesta = Console.ReadLine();
+    } 
+
+    Console.WriteLine("Estos son los usuarios registrados");
+    mostrarUsuario();
+
+    Console.WriteLine("");
+
+    Console.WriteLine("¿Deseas iniciar sesión (s/n)?");
+    respuesta2 = Console.ReadLine();
+
+    if (respuesta2 == "s")
+    {
+        Console.WriteLine("Ingresa el usuario");
+        usuario = Console.ReadLine();
+        Console.WriteLine("Ingresa la contraseña");
+        contra = Console.ReadLine();
+        
+        if (buscar(usuario, contra)  == true) 
+        {
+            Console.WriteLine("Bienvenido has iniciado sesión");
+        }
+        else
+        {
+            while (buscar(usuario, contra)!= true)
+            {
+                Console.WriteLine("Usuario o contraseña errado");
+
+                Console.WriteLine("Ingresa el usuario");
+                usuario = Console.ReadLine();
+
+                Console.WriteLine("Ingresa la contraseña");
+                contra = Console.ReadLine();
+
+                buscar(usuario, contra);
+
+                if (buscar(usuario, contra) == true)
+                {
+                    Console.WriteLine("Bienvenido has iniciado sesión");
+                }
+            }
+        }
+    }
+    
+}
+void llenarUsuario(string s)
+{
+    usuario.Add(s);
+}
+void mostrarUsuario()
+{
+    foreach (string s in usuario)
+    {
+        Console.WriteLine(s);
+    }
+}
+
+void llenarContra(string s)
+{
+    contrasena.Add(s);
+}
+
+Boolean buscar(string n, string c)
+{
+    Boolean r = false;
+    for (int i = 0; i < usuario.Count; i++)
+    {
+        if (usuario[i] == n && contrasena[i] == c) { r = true; break; }
+    }
+    return r;
+}
