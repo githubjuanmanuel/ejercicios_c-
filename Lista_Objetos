@@ -97,7 +97,7 @@ namespace herramientas_objeto
         public Persona(int _id, string _user, string _password)
         {
             Id = _id;
-            User = _password;
+            User = _user;
             Password = _password;
         }
     }
