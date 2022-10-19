@@ -1,0 +1,138 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TiendaConsola
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ArrayList listaProductos = new ArrayList();
+            ArrayList listaFactura = new ArrayList();
+
+            string nombre,respuesta;
+            int cantidad;
+            double precio;
+
+
+            Console.WriteLine("Deseas ingresar un producto");
+            respuesta = Console.ReadLine();
+
+            while (respuesta == "si")
+            {
+                Console.WriteLine("Ingresa el nombre");
+                nombre = Console.ReadLine();
+
+                Console.WriteLine("ingresa la cantidad");
+                cantidad = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("Ingresa el precio");
+                precio = double.Parse(Console.ReadLine());
+
+                Producto producto = new Producto(nombre, cantidad, precio);
+                listaProductos.Add(producto);
+
+                Console.WriteLine("Deseas ingresar un producto");
+                respuesta = Console.ReadLine();
+            }
+
+
+
+            foreach (Producto producto in listaProductos)
+            {
+                
+
+                if (producto.nombre == "a")
+                {
+                    Console.WriteLine(producto.nombre);
+                    Console.WriteLine(producto.cantidad);
+                    Console.WriteLine(producto.precio);
+
+                    int nuevaCantidad;
+                    Console.WriteLine("Ingrese la nueva cantidad");
+                    nuevaCantidad= int.Parse(Console.ReadLine());
+
+                    producto.cantidad = nuevaCantidad;
+
+                    Console.WriteLine(producto.nombre);
+                    Console.WriteLine(producto.cantidad);
+                    Console.WriteLine(producto.precio);
+                }
+            }
+
+            foreach(Producto producto in listaProductos)
+            {
+                if (producto.nombre == "a")
+                {
+                    
+                    Console.WriteLine("Cantidad actual: "+ producto.cantidad);
+                    
+
+                    int nuevaCantidad;
+                    Console.WriteLine("Ingrese la cantidad que desea eliminar");
+                    nuevaCantidad = int.Parse(Console.ReadLine());
+
+                    producto.cantidad = producto.cantidad - nuevaCantidad;
+
+                    Console.WriteLine(producto.nombre);
+                    Console.WriteLine(producto.cantidad);
+                    Console.WriteLine(producto.precio);
+
+                }
+
+
+            }
+            string nombreProducto;
+            int cantidadProducto;
+            Console.WriteLine("Ingresa el nombre del producto");
+            nombreProducto = Console.ReadLine();
+
+            Console.WriteLine("Ingrese la cantidad");
+            cantidadProducto = int.Parse(Console.ReadLine());
+
+            foreach(Producto producto in listaProductos)
+            {
+                if (producto.nombre == nombreProducto)
+                {
+                    producto.Compra(producto.nombre,cantidadProducto,producto.precio);
+                }
+            }
+        }
+    }
+}
+----------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TiendaConsola
+{
+    internal class Producto
+    {
+        public string nombre;
+        public int cantidad;
+        public double precio;
+
+        public Producto(string nombre, int cantidad, double precio)
+        {
+            this.nombre = nombre;
+            this.cantidad = cantidad;
+            this.precio = precio;
+        }
+
+        public void Compra(string nombre, int cantidad, double precio)
+        {
+            double total;
+            Console.WriteLine("Facturando");
+            total = cantidad * precio;
+
+            Console.WriteLine("El total a pagar por el producto "+ nombre + " es: " + total);
+        }
+    }
+}
